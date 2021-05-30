@@ -27,16 +27,12 @@ let
       doCheck = true;
 
       checkPhase = ''
-        runHook preCheck
         export HOME=$(mktemp -d)
         sbt -Duser.home=$HOME +test
-        runHook postCheck
       '';
 
       installPhase = ''
-        runHook preInstall
         echo -n "$inputString" > $out
-        runHook postInstall
       '';
     };
 in
