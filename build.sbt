@@ -42,7 +42,7 @@ lazy val root = project
     publish / skip := true
   )
 
-lazy val core = crossProject(JSPlatform, JVMPlatform)
+lazy val core    = crossProject(JSPlatform, JVMPlatform)
   .in(file("modules/core"))
   .settings(stdSettings("jsonforms-core"))
   .settings(
@@ -50,4 +50,4 @@ lazy val core = crossProject(JSPlatform, JVMPlatform)
     libraryDependencies ++= Dependencies.Core
   )
 lazy val coreJVM = core.jvm
-lazy val coreJS = core.js
+lazy val coreJS  = core.js

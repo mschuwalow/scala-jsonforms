@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
   object Versions {
-    val organizeImports        = "0.5.0"
+    val organizeImports = "0.5.0"
   }
   import Versions._
 
