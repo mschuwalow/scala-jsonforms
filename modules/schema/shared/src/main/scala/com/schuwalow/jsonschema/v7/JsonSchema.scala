@@ -1,8 +1,9 @@
 package com.schuwalow.jsonschema.v7
 
 import cats.Eval
-import javax.xml.validation.Schema
 import com.schuwalow.rjson.{Json, JsonNumber}
+
+import javax.xml.validation.Schema
 
 sealed trait JsonSchema
 
