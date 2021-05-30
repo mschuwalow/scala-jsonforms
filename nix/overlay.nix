@@ -7,7 +7,7 @@ let
 
   mkCheck = jdk: nodejs:
     mkDerivation rec {
-      name = "json-forms-check-${jdk}-${nodejs}";
+      name = "scala-jsonschema-check-${jdk}-${nodejs}";
       version = "latest";
 
       src = sources.sourceByRegex ../. [ "^build.sbt$" "^project.*" "^modules.*" ];
@@ -38,7 +38,7 @@ let
 in
 
 {
-  scala-jsonforms = {
+  scala-jsonschema = {
     checks = {
       latest = mkCheck "jdk" "nodejs";
       jdk8-nodejs14 = mkCheck "jdk8" "nodejs-14_x";

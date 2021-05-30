@@ -62,7 +62,7 @@ object Options {
             "-Ywarn-unused",
             "-Yrangepos"
           )
-        case _ => Seq.empty
+        case _             => Seq.empty
       }
 
     val optimizeOptions =
@@ -74,7 +74,7 @@ object Options {
             Seq("-opt:l:inline")
           case Some((2, 13)) =>
             Seq("-opt:l:inline")
-          case _ =>
+          case _             =>
             Seq.empty
         }
       else Seq.empty

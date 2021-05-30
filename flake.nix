@@ -9,7 +9,7 @@
 
     flake-utils.lib.simpleFlake {
       inherit self nixpkgs;
-      name = "scala-jsonforms";
+      name = "scala-jsonschema";
       preOverlays = [
         (self: super: {
           jre = super.jdk11;

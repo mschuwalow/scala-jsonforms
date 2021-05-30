@@ -37,17 +37,24 @@ inThisBuild(
 lazy val root = project
   .in(file("."))
   .enablePlugins(ScalaJSPlugin)
-  .aggregate(coreJS, coreJVM)
+  .aggregate(rjson.jvm, rjson.js, schema.jvm, schema.js)
   .settings(
     publish / skip := true
   )
 
-lazy val core    = crossProject(JSPlatform, JVMPlatform)
-  .in(file("modules/core"))
-  .settings(stdSettings("jsonforms-core"))
+lazy val rjson = crossProject(JSPlatform, JVMPlatform)
+  .in(file("modules/rjson"))
+  .settings(stdSettings("json-reference"))
+  .settings(
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
+    libraryDependencies ++= Dependencies.RJson
+  )
+
+lazy val schema = crossProject(JSPlatform, JVMPlatform)
+  .in(file("modules/schema"))
+  .dependsOn(rjson)
+  .settings(stdSettings("jsonschema"))
   .settings(
     testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
     libraryDependencies ++= Dependencies.Core
   )
-lazy val coreJVM = core.jvm
-lazy val coreJS  = core.js
