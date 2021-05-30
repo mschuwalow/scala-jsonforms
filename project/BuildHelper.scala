@@ -10,6 +10,7 @@ object BuildHelper {
   def stdSettings(prjName: String) = Seq(
     name := s"$prjName",
     crossScalaVersions := Seq(Scala213, Scala212, Scala211),
+    scalaVersion := crossScalaVersions.value.head,
     scalacOptions := Options.scalacOptions(scalaVersion.value, isSnapshot.value),
     Test / parallelExecution := true
   )

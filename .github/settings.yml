@@ -1,0 +1,29 @@
+repository:
+  has_issues: true
+  has_projects: false
+  has_wiki: false
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: false
+
+labels:
+  - name: "automerge"
+    color: edaf9c
+  - name: "autoupdate"
+    color: 7057ff
+  - name: "dependency-update"
+    color: bfdadc
+
+branches:
+  - name: main
+    protection:
+      required_pull_request_reviews: null
+      required_status_checks:
+        strict: true
+        contexts:
+        - lint
+        - test-latest
+        - test-jdk8-nodejs14
+        - test-jdk11-nodejs14
+      enforce_admins: false
+      restrictions: null
