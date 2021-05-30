@@ -1,6 +1,6 @@
 name: Autoupdate PRs
 on:
-  push: {}
+  push:
 
 jobs:
   autoupdate:
