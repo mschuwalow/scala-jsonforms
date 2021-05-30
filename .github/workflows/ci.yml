@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  release:
+    types:
+      - published
 
 jobs:
   lint:
@@ -101,3 +104,38 @@ jobs:
     - name: Run tests
       run: |
         nix develop .#checks.jdk11-nodejs14 -c sh -c 'eval "$checkPhase"'
+
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs:
+    - lint
+    - test-latest
+    - test-jdk8-nodejs14
+    - test-jdk11-nodejs14
+    if: github.event_name != 'pull_request'
+    steps:
+    - name: Checkout current branch
+      uses: actions/checkout@v2.3.4
+      with:
+        fetch-depth: 0
+    - name: Install nix
+      uses: cachix/install-nix-action@v12
+      with:
+        install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - name: Configure cachix
+      uses: cachix/cachix-action@v8
+      with:
+        name: '${{ secrets.CACHIX_NAME }}'
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    - name: Cache scala dependencies
+      uses: coursier/cache-action@v6
+    - name: Release artifacts
+      run: nix develop --command sh -c "sbt ci-release"
+      env:
+        PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+        PGP_SECRET: ${{ secrets.PGP_SECRET }}
+        SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
