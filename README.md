@@ -1,2 +1,2 @@
-# scala-jsonforms
-ADTs for the JSON Forms standard
+# scala-jsonschema
+ADTs for the JSON Schema and JSON Forms standards
