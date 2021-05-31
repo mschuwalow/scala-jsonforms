@@ -12,7 +12,7 @@ labels:
   - name: "autoupdate"
     color: 7057ff
   - name: "dependency-update"
-    color: bfdadc
+    color: bfdadb
 
 branches:
   - name: main
