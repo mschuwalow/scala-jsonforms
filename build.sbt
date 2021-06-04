@@ -56,5 +56,5 @@ lazy val schema = crossProject(JSPlatform, JVMPlatform)
   .settings(stdSettings("jsonschema"))
   .settings(
     testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
-    libraryDependencies ++= Dependencies.Core
+    libraryDependencies ++= Dependencies.Schema
   )

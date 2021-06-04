@@ -2,21 +2,24 @@ self: super:
 
 let
   inherit (super) pkgs lib;
+  inherit (pkgs) writeScriptBin;
   inherit (pkgs.stdenv) mkDerivation;
   inherit (lib) sources;
+
+  checkScript = writeScriptBin "runCheck" ''
+    sbt -Duser.home=$HOME +test
+  '';
 
   mkCheck = jdk: nodejs:
     mkDerivation rec {
       name = "scala-jsonschema-check-${jdk}-${nodejs}";
       version = "latest";
 
-      src = sources.sourceByRegex ../. [ "^build.sbt$" "^project.*" "^modules.*" ];
+      src =
+        sources.sourceByRegex ../. [ "^build.sbt$" "^project.*" "^modules.*" ];
 
-      nativeBuildInputs = [
-        pkgs."${jdk}"
-        pkgs."${nodejs}"
-        pkgs.sbt
-      ];
+      nativeBuildInputs =
+        [ pkgs."${jdk}" pkgs."${nodejs}" pkgs.sbt checkScript ];
 
       inputString = toString src;
       outputHashAlgo = "sha256";
@@ -27,17 +30,20 @@ let
       doCheck = true;
 
       checkPhase = ''
+        runHook preCheck
         export HOME=$(mktemp -d)
-        sbt -Duser.home=$HOME +test
+        runCheck
+        runHook postCheck
       '';
 
       installPhase = ''
+        runHook preInstall
         echo -n "$inputString" > $out
+        runHook postInstall
       '';
     };
-in
 
-{
+in {
   scala-jsonschema = {
     checks = {
       latest = mkCheck "jdk" "nodejs";

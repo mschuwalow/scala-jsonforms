@@ -1,1 +1,2 @@
-{ pkgs }: pkgs.mkShell { buildInputs = with pkgs; [ gnumake nixfmt sbt fd nodejs ]; }
+{ pkgs }:
+pkgs.mkShell { buildInputs = with pkgs; [ gnumake nixfmt sbt fd nodejs ]; }

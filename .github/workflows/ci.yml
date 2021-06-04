@@ -55,7 +55,7 @@ jobs:
       uses: coursier/cache-action@v6
     - name: Run tests
       run: |
-        nix develop .#checks.latest -c sh -c 'eval "$checkPhase"'
+        nix develop .#checks.latest -c runCheck
 
   test-jdk8-nodejs14:
     runs-on: ubuntu-latest
@@ -79,7 +79,7 @@ jobs:
       uses: coursier/cache-action@v6
     - name: Run tests
       run: |
-        nix develop .#checks.jdk8-nodejs14 -c sh -c 'eval "$checkPhase"'
+        nix develop .#checks.jdk8-nodejs14 -c runCheck
 
   test-jdk11-nodejs14:
     runs-on: ubuntu-latest
@@ -103,7 +103,7 @@ jobs:
       uses: coursier/cache-action@v6
     - name: Run tests
       run: |
-        nix develop .#checks.jdk11-nodejs14 -c sh -c 'eval "$checkPhase"'
+        nix develop .#checks.jdk11-nodejs14 -c runCheck
 
   publish:
     runs-on: ubuntu-latest

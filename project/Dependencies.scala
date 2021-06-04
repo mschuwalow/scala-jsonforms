@@ -14,13 +14,11 @@ object Dependencies {
     "org.typelevel" %% "cats-core" % cats
   )
 
-  val Core = Seq(
-    "org.typelevel" %% "cats-core" % cats
-  )
-
-  val Forms = Seq.empty
-
   val ScalaFix = Seq(
     "com.github.liancheng" %% "organize-imports" % organizeImports
+  )
+
+  val Schema = Seq(
+    "org.typelevel" %% "cats-core" % cats
   )
 }
