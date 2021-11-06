@@ -6,7 +6,7 @@ object Dependencies {
 
     val circe = "0.14.1"
 
-    val organizeImports = "0.5.0"
+    val organizeImports = "0.6.0"
   }
   import Versions._
 
