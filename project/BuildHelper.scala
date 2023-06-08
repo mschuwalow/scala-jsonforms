@@ -4,7 +4,7 @@ import Keys._
 object BuildHelper {
 
   val Scala211: String = "2.11.12"
-  val Scala212: String = "2.12.17"
+  val Scala212: String = "2.12.18"
   val Scala213: String = "2.13.6"
 
   def stdSettings(prjName: String) = Seq(
